@@ -1,4 +1,4 @@
-package serialization;
+package serialization.data;
 
 import java.io.Serializable;
 import java.util.*;

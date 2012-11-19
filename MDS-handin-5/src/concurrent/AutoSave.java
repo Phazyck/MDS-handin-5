@@ -3,7 +3,7 @@ package concurrent;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
 import javax.xml.bind.*;
-import serialization.Cal;
+import serialization.data.Cal;
 
 public class AutoSave implements Runnable {
 

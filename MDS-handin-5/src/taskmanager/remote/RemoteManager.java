@@ -1,11 +1,13 @@
 package taskmanager.remote;
 
-import serialization.envelope.Envelope;
 import java.net.*;
 import javax.xml.bind.JAXBException;
 import remote.*;
 import remote.udp.string.UdpStringTransmitter;
-import serialization.*;
+import serialization.data.Task;
+import serialization.data.Tasks;
+import serialization.data.Users;
+import serialization.secure.Envelope;
 import static serialization.util.Serializer.*;
 import taskmanager.TaskManager;
 

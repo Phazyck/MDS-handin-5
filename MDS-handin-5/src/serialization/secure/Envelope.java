@@ -1,9 +1,7 @@
-package serialization.envelope;
+package serialization.secure;
 
 import java.io.Serializable;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement
 public class Envelope implements Serializable {
@@ -13,32 +11,51 @@ public class Envelope implements Serializable {
      *
      * @param args Not used.
      */
-    public static void main(String[] args) throws JAXBException {
-        Envelope e = new Envelope("a", "b");
-        System.out.printf("command:%s data:%s\n", e.command, e.data);
+    public static void main(String[] args) throws javax.xml.bind.JAXBException {
+        Envelope e = new Envelope("a", "b", "c");
+        System.out.printf("token:%s command:%s data:%s\n", e.token, e.command, e.data);
         String xml = serialization.util.Serializer.serialize(e);
         System.out.println(xml);
         e = serialization.util.Serializer.deSerialize(xml, Envelope.class);
-        System.out.printf("command:%s data:%s\n", e.command, e.data);
+        System.out.printf("token:%s command:%s data:%s\n", e.token, e.command, e.data);
     }
 
     /**
      * Constructs an Envelope with blank data.
      */
     public Envelope() {
-        this("", "");
+        this("", "", "");
     }
-
+    
     /**
-     * Constructs an Envelope by defining all its contents.
+     * Constructs an Envelope with no token.
      *
      * @param command The command which at some point will be invoked.
      * @param data The data needed to invoke the command.
      */
     public Envelope(String command, String data) {
+        this("", command, data);
+    }
+
+    /**
+     * Constructs an Envelope by defining all its contents.
+     *
+     * @param token The token which grants the required privileges.
+     * @param command The command which at some point will be invoked.
+     * @param data The data needed to invoke the command.
+     */
+    public Envelope(String token, String command, String data) {
+        this.token = token;
         this.command = command;
         this.data = data;
     }
+    
+    /**
+     * The token which grants the required privileges.
+     */
+    @XmlElement
+    public String token;
+    
     /**
      * The command which at some point will be invoked.
      */

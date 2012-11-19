@@ -6,7 +6,7 @@ import java.util.concurrent.*;
 import javax.xml.bind.JAXBException;
 import remote.*;
 import remote.udp.string.UdpStringReceiver;
-import serialization.envelope.Envelope;
+import serialization.secure.Envelope;
 import static serialization.util.Serializer.*;
 import taskmanager.TaskManager;
 import taskmanager.local.LocalManager;

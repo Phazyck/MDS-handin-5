@@ -1,6 +1,8 @@
 package taskmanager;
 
-import serialization.*;
+import serialization.data.Task;
+import serialization.data.Users;
+import serialization.data.Tasks;
 
 /**
  * An interface which defines what features a TaskManager must provide.

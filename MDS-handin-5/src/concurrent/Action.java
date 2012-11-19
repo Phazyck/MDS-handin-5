@@ -2,7 +2,7 @@ package concurrent;
 
 import javax.xml.bind.JAXBException;
 import remote.Transmitter;
-import serialization.envelope.Envelope;
+import serialization.secure.Envelope;
 import static serialization.util.Serializer.*;
 import taskmanager.TaskManager;
 

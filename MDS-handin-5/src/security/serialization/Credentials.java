@@ -1,4 +1,4 @@
-package serialization.secure;
+package security.serialization;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.*;
@@ -17,9 +17,9 @@ public class Credentials implements Serializable {
     public static void main(String[] args) throws javax.xml.bind.JAXBException {
         Credentials c = new Credentials("user", "password");
         System.out.printf("user:%s password:%s\n", c.user, c.password);
-        String xml = serialization.util.Serializer.serialize(c);
+        String xml = serialization.Serializer.serialize(c);
         System.out.println(xml);
-        c = serialization.util.Serializer.deSerialize(xml, Credentials.class);
+        c = serialization.Serializer.deSerialize(xml, Credentials.class);
         System.out.printf("user:%s password:%s\n", c.user, c.password);
     }
 

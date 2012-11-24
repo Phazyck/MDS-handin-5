@@ -1,4 +1,4 @@
-package serialization.data;
+package serialization.common;
 
 import java.io.Serializable;
 import java.util.*;
@@ -22,9 +22,9 @@ public class Task implements Serializable {
     public static void main(String[] args) throws JAXBException {
         Task t = new Task("a", "b", "c", "d", "e", "f", "g", "h", "i");
         System.out.printf("id:%s name:%s date:%s status:%s required:%s description:%s attendants:%s conditions:%s responses:%s\n", t.id, t.name, t.date, t.status, t.required, t.description, t.attendants, t.conditions, t.responses);
-        String xml = serialization.util.Serializer.serialize(t);
+        String xml = serialization.Serializer.serialize(t);
         System.out.println(xml);
-        t = serialization.util.Serializer.deSerialize(xml, Task.class);
+        t = serialization.Serializer.deSerialize(xml, Task.class);
         System.out.printf("id:%s name:%s date:%s status:%s required:%s description:%s attendants:%s conditions:%s responses:%s\n", t.id, t.name, t.date, t.status, t.required, t.description, t.attendants, t.conditions, t.responses);
     }
 
@@ -89,9 +89,9 @@ public class Task implements Serializable {
      * @return True if the task status is "executed", otherwise false.
      */
     public boolean isExecuted() {
-        return status.equalsIgnoreCase("executed") ? true : false;
+        return status.equalsIgnoreCase("executed");
     }
-    
+
     public void setExecuted(boolean executed) {
         status = executed ? "executed" : "not-executed";
     }
@@ -107,10 +107,11 @@ public class Task implements Serializable {
      *
      * @return True if it is true that the task is required, otherwise false.
      */
+    @XmlTransient
     public boolean isRequired() {
-        return required.equalsIgnoreCase("true") ? true : false;
+        return required.equalsIgnoreCase("true");
     }
-    
+
     public void setRequired(boolean required) {
         this.required = "" + required;
     }
@@ -132,8 +133,11 @@ public class Task implements Serializable {
      * @return A string list containing attendant IDs.
      */
     public List<String> attendantsAsList() {
-        return Arrays.asList(attendants.split(", "));
-
+        if (attendants.trim().isEmpty()) {
+            return new ArrayList<>();
+        } else {
+            return Arrays.asList(attendants.split(", "));
+        }
     }
     /**
      * Names of all users attending the task, (format: user1, user2, ...,
@@ -148,7 +152,11 @@ public class Task implements Serializable {
      * @return A string list containing condition (task) IDs.
      */
     public List<String> conditionsAsList() {
-        return Arrays.asList(conditions.split(", "));
+        if (conditions.trim().isEmpty()) {
+            return new ArrayList<>();
+        } else {
+            return Arrays.asList(conditions.split(", "));
+        }
     }
     /**
      * IDs of all condition tasks, (format: id1, id2, ..., idn).
@@ -162,7 +170,11 @@ public class Task implements Serializable {
      * @return A string list containing response (task) IDs.
      */
     public List<String> responsesAsList() {
-        return Arrays.asList(responses.split(", "));
+        if (responses.trim().isEmpty()) {
+            return new ArrayList<>();
+        } else {
+            return Arrays.asList(responses.split(", "));
+        }
     }
     /**
      * IDs of all repsonse tasks, (format: id1, id2, ..., idn).

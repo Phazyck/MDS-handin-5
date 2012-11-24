@@ -1,4 +1,4 @@
-package serialization.data;
+package serialization.common;
 
 import java.io.*;
 import java.util.*;
@@ -29,9 +29,9 @@ public class Tasks implements Serializable, Iterable<Task> {
             System.out.printf("id:%s name:%s date:%s status:%s required:%s description:%s attendants:%s conditions:%s responses:%s\n", x.id, x.name, x.date, x.status, x.required, x.description, x.attendants, x.conditions, x.responses);
         }
 
-        String xml = serialization.util.Serializer.serialize(t);
+        String xml = serialization.Serializer.serialize(t);
         System.out.println(xml);
-        t = serialization.util.Serializer.deSerialize(xml, Tasks.class);
+        t = serialization.Serializer.deSerialize(xml, Tasks.class);
         for (Task x : t) {
             System.out.printf("id:%s name:%s date:%s status:%s required:%s description:%s attendants:%s conditions:%s responses:%s\n", x.id, x.name, x.date, x.status, x.required, x.description, x.attendants, x.conditions, x.responses);
         }

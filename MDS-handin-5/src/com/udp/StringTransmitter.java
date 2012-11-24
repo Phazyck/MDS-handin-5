@@ -1,20 +1,19 @@
-package remote.udp.string;
+package com.udp;
 
 import java.io.*;
 import java.net.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import remote.Receiver;
-import remote.Transmitter;
+import com.Receiver;
+import com.Transmitter;
 
 /**
  * A transmitter which sends Strings through UDP.
  */
-public class UdpStringTransmitter implements Transmitter<String> {
+public class StringTransmitter implements Transmitter<String> {
 
     private DatagramSocket socket;
     private InetAddress address;
     private int port;
+    private boolean verbose = false;
 
     /**
      * Constructs a UdpTransmitter with host = "localhost" and port = 4445.
@@ -24,7 +23,7 @@ public class UdpStringTransmitter implements Transmitter<String> {
      * @throws SocketException if the socket could not be opened, or the socket
      * could not bind to the specified local port.
      */
-    public UdpStringTransmitter() throws UnknownHostException, SocketException {
+    public StringTransmitter() throws UnknownHostException, SocketException {
         this("localhost", 4445);
     }
 
@@ -38,7 +37,7 @@ public class UdpStringTransmitter implements Transmitter<String> {
      * @throws SocketException if the socket could not be opened, or the socket
      * could not bind to the specified local port.
      */
-    public UdpStringTransmitter(String host, int port) throws UnknownHostException, SocketException {
+    public StringTransmitter(String host, int port) throws UnknownHostException, SocketException {
         this(new DatagramPacket(new byte[256], 256, InetAddress.getByName(host), port));
     }
 
@@ -49,7 +48,7 @@ public class UdpStringTransmitter implements Transmitter<String> {
      * @throws SocketException if the socket could not be opened, or the socket
      * could not bind to the specified local port.
      */
-    public UdpStringTransmitter(DatagramPacket packet) throws SocketException {
+    public StringTransmitter(DatagramPacket packet) throws SocketException {
         this.socket = new DatagramSocket();
         this.address = packet.getAddress();
         this.port = packet.getPort();
@@ -69,12 +68,20 @@ public class UdpStringTransmitter implements Transmitter<String> {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        
+        if(verbose) {
+            System.out.println("[-OUT->] " + message);
+        } 
+    }
+    
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
     }
 
     @Override
     public Receiver<String> getReceiver() {
         try {
-            return new UdpStringReceiver(socket.getPort(), 255);
+            return new StringReceiver(socket);
         } catch (SocketException ex) {
             System.out.println(ex);
             return null;            

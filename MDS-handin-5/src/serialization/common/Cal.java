@@ -1,4 +1,4 @@
-package serialization.data;
+package serialization.common;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -40,9 +40,9 @@ public class Cal implements Serializable {
             System.out.printf("id:%s name:%s date:%s status:%s required:%s description:%s attendants:%s conditions:%s responses:%s\n", x.id, x.name, x.date, x.status, x.required, x.description, x.attendants, x.conditions, x.responses);
         }
 
-        String xml = serialization.util.Serializer.serialize(c);
+        String xml = serialization.Serializer.serialize(c);
         System.out.println(xml);
-        c = serialization.util.Serializer.deSerialize(xml, Cal.class);
+        c = serialization.Serializer.deSerialize(xml, Cal.class);
         for (User x : c.users) {
             System.out.printf("name:%s password:%s\n", x.name, x.password);
         }

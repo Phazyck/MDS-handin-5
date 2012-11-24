@@ -1,6 +1,7 @@
-package serialization.data;
+package serialization.common;
 
 import java.io.Serializable;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -15,12 +16,12 @@ public class User implements Serializable {
      *
      * @param args Not used.
      */
-    public static void main(String[] args) throws javax.xml.bind.JAXBException {
+    public static void main(String[] args) throws JAXBException {
         User u = new User("a", "b");
         System.out.printf("name:%s password:%s\n", u.name, u.password);
-        String xml = serialization.util.Serializer.serialize(u);
+        String xml = serialization.Serializer.serialize(u);
         System.out.println(xml);
-        u = serialization.util.Serializer.deSerialize(xml, User.class);
+        u = serialization.Serializer.deSerialize(xml, User.class);
         System.out.printf("name:%s password:%s\n", u.name, u.password);
     }
 

@@ -1,4 +1,4 @@
-package serialization.util;
+package serialization;
 
 import java.io.*;
 import javax.xml.bind.*;

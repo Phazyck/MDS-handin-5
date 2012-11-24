@@ -1,4 +1,4 @@
-package serialization.data;
+package serialization.common;
 
 import java.io.*;
 import java.util.*;
@@ -28,9 +28,9 @@ public class Users implements Serializable, Iterable<User> {
         for (User x : u) {
             System.out.printf("name:%s password:%s\n", x.name, x.password);
         }
-        String xml = serialization.util.Serializer.serialize(u);
+        String xml = serialization.Serializer.serialize(u);
         System.out.println(xml);
-        u = serialization.util.Serializer.deSerialize(xml, Users.class);
+        u = serialization.Serializer.deSerialize(xml, Users.class);
         for (User x : u) {
             System.out.printf("name:%s password:%s\n", x.name, x.password);
         }

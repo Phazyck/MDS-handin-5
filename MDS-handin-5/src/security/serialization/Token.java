@@ -1,4 +1,4 @@
-package serialization.secure;
+package security.serialization;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,9 +19,9 @@ public class Token implements Serializable {
     public static void main(String[] args) throws javax.xml.bind.JAXBException {
         Token t = new Token("a");
         System.out.printf("role:%S timestamp:%s\n", t.role, t.timestamp);        
-        String xml = serialization.util.Serializer.serialize(t);
+        String xml = serialization.Serializer.serialize(t);
         System.out.println(xml);
-        t = serialization.util.Serializer.deSerialize(xml, Token.class);
+        t = serialization.Serializer.deSerialize(xml, Token.class);
         System.out.printf("role:%S timestamp:%s\n", t.role, t.timestamp);
     }
 

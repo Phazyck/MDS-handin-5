@@ -1,4 +1,4 @@
-package remote;
+package com;
 
 /**
  * An interface for an object which actively sends objects to corresponding

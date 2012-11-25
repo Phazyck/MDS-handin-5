@@ -1,9 +1,9 @@
-package com.udp;
+package comm.udp;
 
 import java.io.*;
 import java.net.*;
-import com.Receiver;
-import com.Transmitter;
+import comm.Receiver;
+import comm.Transmitter;
 
 /**
  * A transmitter which sends Strings through UDP.

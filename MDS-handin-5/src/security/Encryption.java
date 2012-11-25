@@ -1,7 +1,7 @@
 package security;
 
-import com.Receiver;
-import com.Transmitter;
+import comm.Receiver;
+import comm.Transmitter;
 import java.security.*;
 import java.security.spec.*;
 import javax.crypto.*;
@@ -34,7 +34,7 @@ public class Encryption {
             @Override
             public void run() {
                 try {
-                    Transmitter<String> out = new com.udp.StringTransmitter("localhost", 4320);
+                    Transmitter<String> out = new comm.udp.StringTransmitter("localhost", 4320);
                     Key key = Encryption.suggestKey(out);
                     String message = "Eve should mind her own business!";
                     System.out.println("A : B has accepted the suggested key: \n\t" + bytesToString(key.getEncoded()));
@@ -55,7 +55,7 @@ public class Encryption {
             @Override
             public void run() {
                 try {
-                    Receiver<String> in = new com.udp.StringReceiver(new java.net.DatagramSocket(4320));
+                    Receiver<String> in = new comm.udp.StringReceiver(new java.net.DatagramSocket(4320));
                     Key key = Encryption.acceptKey(in);
                     System.out.println("B : Accepted secret key suggested by A : \n\t" + bytesToString(key.getEncoded()));
                     String encrypted = in.receive();

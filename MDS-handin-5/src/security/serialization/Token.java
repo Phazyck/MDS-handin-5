@@ -17,7 +17,7 @@ public class Token implements Serializable {
      * @param args Not used.
      */
     public static void main(String[] args) throws javax.xml.bind.JAXBException {
-        Token t = new Token("a");
+        Token t = new Token("test", new Date().toString());
         System.out.printf("role:%S timestamp:%s\n", t.role, t.timestamp);        
         String xml = serialization.Serializer.serialize(t);
         System.out.println(xml);
@@ -29,7 +29,7 @@ public class Token implements Serializable {
      * Initialize an empty Token.
      */
     public Token() {
-        this("none");
+        this("none", new Date().toString());
     }
 
     /**
@@ -38,9 +38,9 @@ public class Token implements Serializable {
      * @param role The role, which defines the class of privileges.
      * privileges.
      */
-    public Token(String role) {
+    public Token(String role, String timestamp) {
         this.role = role;
-        this.timestamp = new Date();
+        this.timestamp = timestamp;
     }
     /**
      * The role, which defines the class of privileges.
@@ -51,7 +51,7 @@ public class Token implements Serializable {
      * The timestamp, which defines the time limit of the given privileges.
      */
     @XmlElement
-    public Date timestamp;
+    public String timestamp;
     
     @Override
     public String toString() {

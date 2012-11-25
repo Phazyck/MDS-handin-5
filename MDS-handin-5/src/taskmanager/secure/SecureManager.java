@@ -1,20 +1,21 @@
 package taskmanager.secure;
 
+
 import securemanager.ISecureManager;
 import security.serialization.Token;
+import serialization.common.Cal;
 
 /**
- * The SecureManager acts as a proxy to another TaskManager,
- * requiring authorization through the use of tokens in order to 
+ * The SecureManager acts as a proxy to another TaskManager, requiring
+ * authorization through the use of tokens in order to
  */
 public class SecureManager implements ISecureManager {
-    
-    
+
+    private Cal cal = null;
+    private final int timeSpanMinutes = 5;
+
     public SecureManager() {
-        
     }
-    
-    
 
     @Override
     public String executeTask(String taskId, Token token) {
@@ -26,8 +27,7 @@ public class SecureManager implements ISecureManager {
         //return "role-mismatch";
         // TODO - Return "token-expired" if the token has expired.
         //return "token-expired";
-        
+
         return "";
     }
-
 }

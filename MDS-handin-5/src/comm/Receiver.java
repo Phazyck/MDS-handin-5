@@ -1,4 +1,4 @@
-package com;
+package comm;
 
 /**
  * An interface for an object which actively receives objects from
